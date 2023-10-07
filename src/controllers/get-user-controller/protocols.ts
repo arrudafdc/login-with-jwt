@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { Request, Response } from "express";
+import { Response } from "express";
 
 export interface IGetUserRepository {
   getUser(): Promise<User[]>;
