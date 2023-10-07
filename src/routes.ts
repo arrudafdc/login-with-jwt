@@ -1,17 +1,18 @@
 import { Router } from "express";
 import { CreateUserController } from "./controllers/create-user-controller/CreateUserController";
 import { CreateUserRepository } from "./repositories/create-user-repository/CreateUserRepository";
-import { GetUserController } from "./controllers/get-user-controller/GetUsersController";
-import { GetUserRepository } from "./repositories/get-users-repository/GetUsersRepository";
+import { GetUserController } from "./controllers/get-user-controller/GetUserController";
+import { GetUserRepository } from "./repositories/get-user-repository/GetUserRepository";
 import { AuthRepository } from "./repositories/auth-repository/AuthRepository";
 import { AuthController } from "./controllers/auth-controller/AuthController";
+import { authMiddleware } from "./middlewares/auth";
 
 export const routes = Router();
 
-routes.get("/users", (req, res) => {
+routes.get("/user/:email", authMiddleware, (req, res) => {
   const getUserRepository = new GetUserRepository();
   const getUserController = new GetUserController(getUserRepository);
-  getUserController.handle(res);
+  getUserController.handle(req, res);
 });
 
 routes.post("/user/create", (req, res) => {

@@ -27,7 +27,9 @@ export class AuthRepository implements IAuthRepository {
       throw new AppError("Password invalid");
     }
 
-    const token = sign({ id: user.id }, "secret", { expiresIn: "1d" });
+    const secret = process.env.SECRET;
+
+    const token = sign({ id: user.id }, secret || "secret");
 
     const { id } = user;
 
