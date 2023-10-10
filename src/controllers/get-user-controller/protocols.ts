@@ -2,7 +2,7 @@ import { User } from "@prisma/client";
 import { Request, Response } from "express";
 
 export interface IGetUserRepository {
-  getUser(email: string): Promise<User>;
+  getUser(email: string): Promise<object>;
 }
 
 export interface IGetUserController {
